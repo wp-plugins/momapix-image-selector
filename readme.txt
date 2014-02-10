@@ -1,4 +1,4 @@
-=== Momapix Wordpress Plugin ===
+=== Momapix Image Selector ===
 Contributors: cristiano.zanca 
 Tags: momapix, picture, photo, Illustration, gallery
 Requires at least: 3.3
@@ -11,3 +11,8 @@ Momapix image plugin allow you to insert Momapix photos in your post while you a
 == Installation ==
 
 Extract the zip file and just drop the contents in the wp-content/plugins/ directory of your WordPress installation and then activate the Plugin from Plugins page.
+
+
+== Screenshots ==
+
+1. Here's a screenshot of it in action
