@@ -4,7 +4,7 @@
     Plugin URI: http://www.momapix.com 
     Description: Plugin for displaying photos from Momapix album 
     Author: Cristiano Zanca
-    Version: 0.6 
+    Version: 1.0.2 
     Author URI: http://cristiano.zanca.it 
     License: GPLv2 - http://www.gnu.org/licenses/gpl-2.0.html
     */  
