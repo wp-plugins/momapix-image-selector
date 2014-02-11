@@ -15,4 +15,8 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Screenshots ==
 
-1. Here's a screenshot of it in action
+1. Here's a screenshot of it in action.
+
+== Changelog ==
+= 1.0.1 =
+* Addes screenshot.
