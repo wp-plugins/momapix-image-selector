@@ -16,6 +16,8 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 == Screenshots ==
 
 1. Here's a screenshot of it in action.
+2. Settings in the left side menu.
+3. Icon to click in editing post to add momapix image.
 
 == Changelog ==
 = 1.0.1 =
