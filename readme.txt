@@ -19,6 +19,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 1.3 =
+* Fixed bugs
+
 = 1.0.2 = 
 * Added screenshot
 
