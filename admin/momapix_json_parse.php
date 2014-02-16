@@ -95,7 +95,7 @@ echo '<br><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&m
     {
                
 		
-    echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage='.++$page.'&type=wp_momapix_photo&event_title='.$result['title'].'&id_event='.$result['id_event'].'">Click here to next</a>';
+    echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.++$page.'&type=wp_momapix_photo&event_title='.$result['title'].'&id_event='.$result['id_event'].'">Click here to next</a>';
  
     
     }
@@ -103,7 +103,7 @@ echo '<br><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&m
     elseif (isset($_GET['momapage']) && count($results['itemsInEvent'])==$results['requestItemsPerPage'])
     {
  
-      echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage='.++$page.'&type=wp_momapix_photo&event_title='.$result['title'].'&id_event='.$result['id_event'].'">Click here to next >>></a>';
+      echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.++$page.'&type=wp_momapix_photo&event_title='.$result['title'].'&id_event='.$result['id_event'].'">Click here to next >>></a>';
      
           
     } 
@@ -115,7 +115,8 @@ echo '<br><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&m
    
 
 else {
-
+echo '<p id="top_msg"><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage=1&type=wp_momapix_photo">  Last Photos</a>  ';
+echo '||| <a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=cerca&momapage=1&type=wp_momapix_photo">Search</a>  </p>';
  echo '<p id="top_msg">pag. '.$_GET['momapage'].'</p>';
  
 // prev button archive
@@ -123,7 +124,7 @@ else {
 if ($page>1){
 
     echo '<div id="momapix_image_results"><div  id="momapix_image_results_inside">';
-    echo '<br><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage='.($_GET['momapage']-1).'&type=wp_momapix_photo"><img id="img_result" src="'.WP_PLUGIN_URL .'/momapix-image-selector/images/prev_arrow.gif"><br>Click here to prev</a>'; 
+    echo '<br><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.($_GET['momapage']-1).'&type=wp_momapix_photo"><img id="img_result" src="'.WP_PLUGIN_URL .'/momapix-image-selector/images/prev_arrow.gif"><br>Click here to prev</a>'; 
     echo '</div>';
     echo '</div>';
 
