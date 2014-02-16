@@ -85,7 +85,8 @@ function MomapixMediaTab() {
 
 
 function MomapixMediaUpload() {
-	global $redir_tab;
+	$redir_tab = $_GET['tab'];
+        global $redir_tab;
 	
 	try {
 		checkMomaPIXKey();
@@ -93,7 +94,7 @@ function MomapixMediaUpload() {
 		$redir_tab = 'settings';
 	}
 	
-	$gtab	=	$redir_tab	?: $_GET['tab'];
+	$gtab	=	$redir_tab	;
 	
             if ((isset($gtab) && $gtab == 'settings'))
             {
