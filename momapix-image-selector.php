@@ -74,13 +74,15 @@ function add_momapix_button() {
 
 function MomapixMediaTab() {
   $tabs = array (
-        'photo' =>  __('Momapix Last Photos'),
-        'cerca' => __('Search'),
-        'settings' => __('Settings')
+        'photo' =>  'Momapix Image Selector',
+        //'photo' =>  __('Momapix Last Photos'),
+        'cerca' => '',
+        'settings' => 'Settings'
   );
   
  return  $tabs;
 }
+
 
 function MomapixMediaUpload() {
 	global $redir_tab;
@@ -205,8 +207,8 @@ $new_options['version'] = "0.6";
 add_option( 'momapix_default_value', $new_options );
 } else {
 $existing_options = get_option( 'momapix_default_value' );
-if ( $existing_options['version'] < 0.6 ) {
-$existing_options['version'] = "0.6";
+if ( $existing_options['version'] < 1.3 ) {
+$existing_options['version'] = "1.3";
 update_option( 'momapix_default_value', $existing_options );
 }
 }

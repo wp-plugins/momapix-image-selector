@@ -3,7 +3,7 @@ Contributors: cristiano.zanca
 Tags: momapix, picture, photo, Illustration, gallery
 Requires at least: 3.3
 Tested up to: 3.8.1
-Stable tag: 1.0.2
+Stable tag: 1.3
 
 Momapix image plugin allow you to insert Momapix photos in your post while you are publishing it
 
