@@ -4,7 +4,7 @@
     Plugin URI: http://www.momapix.com 
     Description: Plugin for displaying photos from Momapix album 
     Author: Cristiano Zanca
-    Version: 1.3.1 
+    Version: 1.3.2 
     Author URI: http://cristiano.zanca.it 
     License: GPLv2 - http://www.gnu.org/licenses/gpl-2.0.html
     */  
@@ -13,19 +13,6 @@
 
 // wordpress version check and display warnings
 
-/*
-add_action('admin_notices', 'my_plugin_admin_notices');
-function my_plugin_admin_notices() {
-
-    $version = get_bloginfo('version');
-        if ($version < 3.3){
-    if (is_plugin_active('momapix-image-selector/momapix.php')) {
-        echo '<div id="message" class="updated"><p>Sorry, This Momapix plugin is available on Wordpress 3.3 and later version. Please deactivate it</p></div>';
-    }
-}
-
-}
-*/
 
 register_activation_hook( __FILE__, 'momapix_set_default_value' );
 
@@ -33,9 +20,9 @@ function momapix_set_default_value() {
     
  global $wp_version;
  
-     if (version_compare(PHP_VERSION, '5.3', '<'))
+     if (version_compare(PHP_VERSION, '5.2', '<'))
 {
-    wp_die( 'This plugin requires PHP version 5.3 or higher.' ); 
+    wp_die( 'This plugin requires PHP version 5.2 or higher.' ); 
 }
 elseif ( version_compare( $wp_version, '3.3', '<' ) ) {
 wp_die( 'This plugin requires WordPress version 3.3 or higher.' ); 
@@ -44,12 +31,12 @@ wp_die( 'This plugin requires WordPress version 3.3 or higher.' );
 
     if ( get_option( 'momapix_default_value' ) === false ) {
 $new_options['momapix_account'] = ""; //for test http://demo.momapix.com/develop
-$new_options['version'] = '1.3.1';
+$new_options['version'] = '1.3.2';
 add_option( 'momapix_default_value', $new_options );
 } else {
 $existing_options = get_option( 'momapix_default_value' );
-if ( $existing_options['version'] < '1.3.1' ) {
-$existing_options['version'] = '1.3.1';
+if ( $existing_options['version'] < '1.3.2' ) {
+$existing_options['version'] = '1.3.2';
 update_option( 'momapix_default_value', $existing_options );
 }
 }
@@ -124,7 +111,7 @@ function MomapixMediaUpload() {
 		$redir_tab = 'settings';
 	}
 	
-	$gtab = $redir_tab ?: $_GET['tab'];
+	$gtab = $redir_tab ? $redir_tab : $_GET['tab'];
 	
             if ((isset($gtab) && $gtab == 'settings'))
             {
@@ -146,7 +133,7 @@ function MomapixMediaUpload() {
 
 function checkMomaPIXKey($options	=	null) {
         
-	$options 	= 	$options	?:	get_option( 'momapix_default_value');
+	$options 	= 	$options	? $options :	get_option( 'momapix_default_value');
 	
 	$postdata = 
 			array(
@@ -168,9 +155,9 @@ function checkMomaPIXKey($options	=	null) {
 
 function momapix_file_get_contents($url,$postdata = "") {
 	
-	$postdata	=	array_merge($postdata?:array(),array('api_key' 					=> 'oiyfghrn76540987uy67nbderhgturas'));
+	$postdata	=	array_merge($postdata? $postdata :array(),array('api_key' 					=> 'oiyfghrn76540987uy67nbderhgturas'));
 	
-	$options 	= 	get_option('momapix_default_value')	?:	array();
+	$options 	= 	get_option('momapix_default_value')	? get_option('momapix_default_value') :	array();
 	
 	$opts = array(
 			'http'=>array(
