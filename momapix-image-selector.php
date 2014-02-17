@@ -85,7 +85,7 @@ function MomapixMediaTab() {
 
 
 function MomapixMediaUpload() {
-	$redir_tab = $_GET['tab'];
+	
         global $redir_tab;
 	
 	try {
@@ -94,7 +94,7 @@ function MomapixMediaUpload() {
 		$redir_tab = 'settings';
 	}
 	
-	$gtab	=	$redir_tab	;
+	$gtab = $redir_tab ?: $_GET['tab'];
 	
             if ((isset($gtab) && $gtab == 'settings'))
             {
