@@ -49,41 +49,69 @@ if (isset($_GET['id_event']))
 // back to page
   
 
-echo '<p id="top_msg"> <a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage='.$page.'&type=wp_momapix_photo">Back to Events</a> <br></p> ';
+echo '<p id="top_msg"> <a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage=1&type=wp_momapix_photo">Back to Events</a> <br></p> ';
 echo '<p id="no_images">'.$event_title.'</p>';
 echo '<p id="no_images">pag. '.$page.'</p>';
 
 
 // prev button event
-/*    
+    
 if ($page>1){
  
+echo '<div id="momapix_image_results"><div  id="momapix_image_results_inside">';
+echo '<br><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage='.($_GET['momapage']-1).'&type=wp_momapix_photo&event_title='.$event_title.'&id_event='.$idEvent.'">'; 
+echo '<img id="img_result" src="'.WP_PLUGIN_URL .'/momapix-image-selector/images/prev_arrow.gif"><br>Click here to prev</a>';
+echo '</div>';
+echo '</div>';
 
-echo '<br><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage='.($_GET['momapage']-1).'&type=wp_momapix_photo&event_title='.$event_title.'&id_event='.$idEvent.'">Click here to prev <<<</a>'; 
-
-
-} 
-*/
+}   
 // prev button event end
 
-    foreach($results['itemsInEvent'] as $result)
+
+
+
+foreach($results['itemsInEvent'] as $result)
 		{
-                    $image_moma_url = $baseURL."/Image".$result['id'].'.jpg';
+                    $image_moma_url_m = $baseURL."/Image".$result['id'].'.jpg';
+                    $image_moma_url_s = $baseURL."/Image".$result['id'].'.png';
+                    $image_moma_url_b = $baseURL."/Preview".$result['id'].'.jpg';
                     $image_moma = $result['id'].'.jpg';
+                    
+                    
                     ?>
  
 <div id="momapix_image_results_event">
     <div id="momapix_image_results_inside_event">
         
-		    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url; ?>','<?php echo $post_id; ?>')" />
+		    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
                     <img id="img_result" src="<?php echo $baseURL.'/Image'.$result['id']?>.jpg"/>
                     </a>
-                    <?php echo "<p title=\"".$result['title']." - ".$result['caption']."\">".substr($result['caption'],0,100)."</p>"; ?>
+        <br>
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_s; ?>','<?php echo $post_id; ?>')" />
+                    small</a> | 
+                    
+        
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
+                    med</a> | 
+                    
+        
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_b; ?>','<?php echo $post_id; ?>')" />
+                    big
+                    </a>
+        
+        
+                    <?php 
+                    echo '<p>'.$result['caption'].'</p>'; 
+                    
+                    ?>
+        
+        
+        
                     
     </div>
 </div> 
 
-<!-- momapix_image_event_results end -->
+<!-- ------------------ momapix_image_event_results end -->
                   
                  <?php   
                  }
@@ -94,16 +122,21 @@ echo '<br><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&m
     if (count($results['itemsInEvent'])==$results['requestItemsPerPage'] && (!isset($_GET['momapage'])))
     {
                
-		
-    echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.++$page.'&type=wp_momapix_photo&event_title='.$result['title'].'&id_event='.$result['id_event'].'">Click here to next</a>';
- 
+    echo '<div id="momapix_image_results"><div  id="momapix_image_results_inside">';
+    echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.++$page.'&type=wp_momapix_photo&event_title='.$result['title'].'&id_event='.$result['id_event'].'">';
+    echo '<img id="img_result" src="'.WP_PLUGIN_URL .'/momapix-image-selector/images/next_arrow.gif"><br>Click here to next</a>';
+    echo '</div>';
+    echo '</div>';
     
     }
    
     elseif (isset($_GET['momapage']) && count($results['itemsInEvent'])==$results['requestItemsPerPage'])
     {
- 
-      echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.++$page.'&type=wp_momapix_photo&event_title='.$result['title'].'&id_event='.$result['id_event'].'">Click here to next >>></a>';
+      echo '<div id="momapix_image_results"><div  id="momapix_image_results_inside">';
+      echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.++$page.'&type=wp_momapix_photo&event_title='.$result['title'].'&id_event='.$result['id_event'].'">';
+      echo '<img id="img_result" src="'.WP_PLUGIN_URL .'/momapix-image-selector/images/next_arrow.gif"><br>Click here to next</a>';
+      echo '</div>';
+      echo '</div>';     
      
           
     } 
@@ -145,14 +178,21 @@ if ($page>1){
 <div id="momapix_image_results">
     <div  id="momapix_image_results_inside">
                     
-		    
+		    <?php
+                    echo $result['numberOfItemsInEvent'].' foto';
+                    ?>
                     
                     <a href="<?php echo $_SERVER["PHP_SELF"];?>?post_id=<?php echo $post_id;?>&tab=<?php echo $tabs; ?>&type=wp_momapix_photo&event_title=<?php echo $result['title'];?>&id_event=<?php echo $result['id_event'];?>">
                         <img id="img_result" src="<?php echo $baseURL.'/Image'.$result['idcover']?>.jpg"/>
                     </a>
                     
                     <?php 
-                    echo "<p title=\"".$result['title']." - ".$result['caption']."\">".substr($result['title'],0,100)."</p>"; 
+                    global $numero_photo;
+                    echo "<p title=\"".$result['title']." - ".$result['caption']."\">".substr($result['title'],0,100)."</p>";
+                   
+                   
+                        
+                       
                     ?>
                     
       </div>

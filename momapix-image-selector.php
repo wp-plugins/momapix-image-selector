@@ -4,7 +4,7 @@
     Plugin URI: http://www.momapix.com 
     Description: Plugin for displaying photos from Momapix album 
     Author: Cristiano Zanca
-    Version: 1.3.2 
+    Version: 1.3.3 
     Author URI: http://cristiano.zanca.it 
     License: GPLv2 - http://www.gnu.org/licenses/gpl-2.0.html
     */  
@@ -31,12 +31,12 @@ wp_die( 'This plugin requires WordPress version 3.3 or higher.' );
 
     if ( get_option( 'momapix_default_value' ) === false ) {
 $new_options['momapix_account'] = ""; //for test http://demo.momapix.com/develop
-$new_options['version'] = '1.3.2';
+$new_options['version'] = '1.3.3';
 add_option( 'momapix_default_value', $new_options );
 } else {
 $existing_options = get_option( 'momapix_default_value' );
-if ( $existing_options['version'] < '1.3.2' ) {
-$existing_options['version'] = '1.3.2';
+if ( $existing_options['version'] < '1.3.3' ) {
+$existing_options['version'] = '1.3.3';
 update_option( 'momapix_default_value', $existing_options );
 }
 }
@@ -164,7 +164,7 @@ function momapix_file_get_contents($url,$postdata = "") {
 					'method'			=>	"POST",
 					'user_agent' 		=> 	"MomaPIX Plugin for WordPress V ???",
 					'follow_location' 	=> 	0,
-					'timeout' 			=> 	3,
+					'timeout' 			=> 	5,
 					'content' 			=> http_build_query($postdata)
 			)
 	);
@@ -173,9 +173,17 @@ function momapix_file_get_contents($url,$postdata = "") {
 	
 	$context 		= stream_context_create($opts);
 	
-	if (!($sessionContent	=	@file_get_contents($url, false, $context))) {
-		throw new Exception("Error connecting server. Check server again and try again.");
-	}
+//	if (!($sessionContent	=	@file_get_contents($url, false, $context))) 
+        
+     //    {
+	//	throw new Exception("Error connecting server. Check server again and try again.");
+	// }
+                
+  try 
+  { $sessionContent	=	@file_get_contents($url, false, $context) ;}
+       catch( Exception $e ) {
+    echo  $e->getMessage();
+}
 	
 	
 	if (!empty($http_response_header) and !isset($options['momasessid']))
