@@ -1,6 +1,6 @@
 <?php
 
-  
+    $image_load = WP_PLUGIN_URL . "/momapix-image-selector/images/loader.gif";
     $post_id = absint($_REQUEST['post_id']);
     
     echo '<p id="top_msg"><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage=1&type=wp_momapix_photo"> Last Photos</a> ';
@@ -12,17 +12,29 @@
     ?>
   
 
-     <form class="media-upload-form type-form validate" action="" method="POST">
+     <form id="form" class="media-upload-form type-form validate" action="" method="POST" >
 			
-
+                
                 <input type="text" size="30" name="search_key" value="" />
                 
                 <input type="hidden" name="post_edited" value="<?PHP echo $_GET['post_id']; ?>" />
-	
-                <input type="submit" name="submit" class="button" value="Search" />
+                
+                <input id="submit" type="submit" name="submit" class="button" value="Search" />
+               
+                <div id="loading2" style="display:none; position:relative; left:50%;"><img src="<?php echo $image_load ?>" alt="Loading..." /><br>Loading...</div>
             
             </form>
-         		
+
+         <script type="text/javascript">
+        (function (d)
+            {
+            d.getElementById('form').onsubmit = function () {
+            d.getElementById('submit').style.display = 'block';
+            d.getElementById('loading2').style.display = 'block';
+                 };
+            }(document));
+        </script>
+        
 	<?php
 }
     
@@ -136,8 +148,11 @@ if ($_GET['momapage']>1){
     
     foreach($results['result'] as $result)
     {
-$image_moma_url = $baseURL."/Image".$result['id'].'.jpg';
-$image_moma = $result['id'].'.jpg';
+
+                    $image_moma_url_m = $baseURL."/Image".$result['id'].'.jpg';
+                    $image_moma_url_s = $baseURL."/Image".$result['id'].'.png';
+                    $image_moma_url_b = $baseURL."/Preview".$result['id'].'.jpg';
+                    $image_moma = $result['id'].'.jpg';
 
 
          ?>
@@ -150,12 +165,24 @@ $image_moma = $result['id'].'.jpg';
         <div id="momapix_image_results_inside">
                          
                 
-                <a href="#" onclick="return insert_picture('<?php echo $image_moma_url; ?>','<?php echo $post_id; ?>')" />
-              
-                <img id="img_result" src="<?php echo $image_moma_url; ?>"/>
+                <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
+                <img id="img_result" src="<?php echo $image_moma_url_m; ?>"/>
                 <br/>
                 </a>
-                <?php echo $image_moma ?>            
+                <br>
+                <?php echo $image_moma ?> <br>
+            
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_s; ?>','<?php echo $post_id; ?>')" />
+                    small</a> | 
+                    
+        
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
+                    med</a> | 
+                    
+        
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_b; ?>','<?php echo $post_id; ?>')" />
+                    big
+                    </a>
             
         </div>
 
