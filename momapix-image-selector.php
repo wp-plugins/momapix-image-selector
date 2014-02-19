@@ -4,7 +4,7 @@
     Plugin URI: http://www.momapix.com 
     Description: Plugin for displaying photos from Momapix album 
     Author: Cristiano Zanca
-    Version: 1.3.4 
+    Version: 1.3.5 
     Author URI: http://cristiano.zanca.it 
     License: GPLv2 - http://www.gnu.org/licenses/gpl-2.0.html
     */  
@@ -31,12 +31,12 @@ wp_die( 'This plugin requires WordPress version 3.3 or higher.' );
 
     if ( get_option( 'momapix_default_value' ) === false ) {
 $new_options['momapix_account'] = ""; //for test http://demo.momapix.com/develop
-$new_options['version'] = '1.3.4';
+$new_options['version'] = '1.3.5';
 add_option( 'momapix_default_value', $new_options );
 } else {
 $existing_options = get_option( 'momapix_default_value' );
-if ( $existing_options['version'] < '1.3.4' ) {
-$existing_options['version'] = '1.3.4';
+if ( $existing_options['version'] < '1.3.5' ) {
+$existing_options['version'] = '1.3.5';
 update_option( 'momapix_default_value', $existing_options );
 }
 }
@@ -180,9 +180,14 @@ function momapix_file_get_contents($url,$postdata = "") {
        {
             // per CLAUDIO ho aggiunto questo e funziona
             
-            function exception_handler($exception)
+           if(!function_exists('exception_handler'))
             {
-            echo "Uncaught exception: " , $exception->getMessage(), "\n";
+
+            function exception_handler($exception)
+                {
+                    echo "Uncaught exception: " , $exception->getMessage(), "\n";
+                }
+                
             }
             set_exception_handler('exception_handler');
             throw new Exception("Error connecting server. Check server and try again.");
