@@ -41,7 +41,34 @@ if (isset($_GET['id_event']))
  
   $results = 	json_decode($json, $depth = 1);
 
+?>
+<p id="size_msg">
+<a onmouseover="document.getElementById('div_name_s').style.display='block';" 
+                    onmouseout="document.getElementById('div_name_s').style.display='none';"
+                    href="#"  />
+                    small</a> |
+                    
+                    
+                    <a onmouseover="document.getElementById('div_name_m').style.display='block';" 
+                    onmouseout="document.getElementById('div_name_m').style.display='none';" 
+                    href="#"  />
+                    med</a> | 
+                    
+        
+                    <a onmouseover="document.getElementById('div_name_b').style.display='block';" 
+                    onmouseout="document.getElementById('div_name_b').style.display='none';"
+                    href="#"  />
+                    big
+                    </a> | viewable sample photos size
+</p>
+                    <div  id="div_name_s" style="background: rgb(159, 182, 205);background: rgba(159, 182, 205, .5);display:none;position:absolute;margin:2px 2px 2px 2px;top:0px;right:0px;width:84px;height:47px;z-index:2; padding:2px;">
+                        <p align="right"> small size</p></div>
+                    <div id="div_name_m" style="background: rgb(159, 182, 205);background: rgba(159, 182, 205, .5);display:none;position:absolute;margin:2px 2px 2px 2px;top:0px;right:0px;width:185px;height:123px;z-index:3; padding:2px;">
+                     <p align="right">   medium size</p></div>
+                    <div id="div_name_b" style="background: rgb(159, 182, 205);background: rgba(159, 182, 205, .5);display:none;position:absolute;margin:2px 2px 2px 2px;top:0px;right:0px;width:549px;height:366px;z-index:4; padding:2px;">
+                        <p align="right">big size</p></div>
 
+<?php
  
 
 
@@ -52,6 +79,7 @@ if (isset($_GET['id_event']))
 echo '<p id="top_msg"> <a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage=1&type=wp_momapix_photo">Back to Events</a> <br></p> ';
 echo '<p id="no_images">'.$event_title.'</p>';
 echo '<p id="no_images">pag. '.$page.'</p>';
+
 
 
 // prev button event
@@ -79,18 +107,19 @@ foreach($results['itemsInEvent'] as $result)
                     
                     
                     ?>
- 
-<div id="momapix_image_results_event">
-    <div id="momapix_image_results_inside_event">
-        
+                    
+  
+  <div id="momapix_image_results_event" style="position:relative;z-index:5;">
+    <div id="momapix_image_results_inside_event" style="position:relative;z-index:6;">
+         
 		    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
                     <img id="img_result" src="<?php echo $baseURL.'/Image'.$result['id']?>.jpg"/>
                     </a>
         <br>
                     <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_s; ?>','<?php echo $post_id; ?>')" />
-                    small</a> | 
+                    small</a> |
                     
-        
+                    
                     <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
                     med</a> | 
                     
@@ -98,17 +127,18 @@ foreach($results['itemsInEvent'] as $result)
                     <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_b; ?>','<?php echo $post_id; ?>')" />
                     big
                     </a>
-        
+ 
         
                     <?php 
                     echo '<p>'.$result['caption'].'</p>'; 
                     
                     ?>
+     
         
-        
-        
+         
                     
     </div>
+  
 </div> 
 
 <!-- ------------------ momapix_image_event_results end -->
