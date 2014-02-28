@@ -28,6 +28,6 @@ Account API Key: <input type="text" name="momapix_api_key" value="<?php echo esc
     <div id="momapix-general2" class="wrap">
        <p id="top_msg"> 
         Activate your Momapix Free Account 
-        <a href="http://www.momapix.com/prodotti/momapix-one/attiva-prova-gratuita-one/" target="_blank">CLICK HERE</a>
+        <a href="http://zanca.it/wordpress/momapix-wordpress-plugin/" target="_blank">CLICK HERE</a>
        </p>
     </div>
