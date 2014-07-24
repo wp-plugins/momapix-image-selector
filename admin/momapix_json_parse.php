@@ -112,7 +112,23 @@ foreach($results['itemsInEvent'] as $result)
   <div id="momapix_image_results_event" style="position:relative;z-index:5;">
     <div id="momapix_image_results_inside_event" style="position:relative;z-index:6;">
          
-		    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
+		    
+<!--
+
+
+$exif = exif_read_data(($baseURL.'/Image'.$result['id'].'.jpg'), 0, true);
+echo "IMG Info:<br />\n";
+foreach ($exif as $key => $section) {
+    foreach ($section as $name => $val) {
+        echo "$key.$name: $val<br />\n";
+    }
+}
+-->
+        
+
+        
+        
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
                     <img id="img_result" src="<?php echo $baseURL.'/Image'.$result['id']?>.jpg"/>
                     </a>
         <br>
@@ -130,7 +146,18 @@ foreach($results['itemsInEvent'] as $result)
  
         
                     <?php 
-                    echo '<p>'.$result['caption'].'</p>'; 
+                    
+                    /* Visualizzazione Meta info img*/                              
+                    
+                    echo '<p>'.$result['title'].'</p>'; 
+                    $exif = exif_read_data(($baseURL.'/Image'.$result['id'].'.jpg'), 0, true);
+                    echo "Info:<br />\n";
+                    foreach ($exif as $key => $section) {
+                        foreach ($section as $name => $val) {
+                            echo "$key.$name: $val<br />\n";
+                                                            }
+                                                        }
+                    
                     
                     ?>
      
