@@ -11,7 +11,7 @@
 
 
 
-// wordpress version check and display warnings
+// @ wordpress version check and display warnings
 
 
 register_activation_hook( __FILE__, 'momapix_set_default_value' );

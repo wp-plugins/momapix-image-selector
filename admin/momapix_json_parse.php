@@ -77,7 +77,7 @@ if (isset($_GET['id_event']))
   
 
 echo '<p id="top_msg"> <a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage=1&type=wp_momapix_photo">Back to Events</a> <br></p> ';
-echo '<p id="no_images">'.$event_title.'</p>';
+echo '<p id="no_images">'.stripslashes($event_title).'</p>';
 echo '<p id="no_images">pag. '.$page.'</p>';
 
 
@@ -87,7 +87,7 @@ echo '<p id="no_images">pag. '.$page.'</p>';
 if ($page>1){
  
 echo '<div id="momapix_image_results"><div  id="momapix_image_results_inside">';
-echo '<br><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage='.($_GET['momapage']-1).'&type=wp_momapix_photo&event_title='.$event_title.'&id_event='.$idEvent.'">'; 
+echo '<br><a href="'.$_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab='.$tabs.'&momapage='.($_GET['momapage']-1).'&type=wp_momapix_photo&event_title='.htmlspecialchars(stripslashes($event_title)).'&id_event='.$idEvent.'">'; 
 echo '<img id="img_result" src="'.WP_PLUGIN_URL .'/momapix-image-selector/images/prev_arrow.gif"><br>Click here to prev</a>';
 echo '</div>';
 echo '</div>';
@@ -100,13 +100,21 @@ echo '</div>';
 
 foreach($results['itemsInEvent'] as $result)
 		{
-                    $image_moma_url_m = $baseURL."/Image".$result['id'].'.jpg';
-                    $image_moma_url_s = $baseURL."/Image".$result['id'].'.png';
-                    $image_moma_url_b = $baseURL."/Preview".$result['id'].'.jpg';
+                    $image_moma_url_m = $baseURL."Image".$result['id'].'.jpg';
+                    $image_moma_url_s = $baseURL."Image".$result['id'].'.png';
+                    $image_moma_url_b = $baseURL."Preview".$result['id'].'.jpg';
                     $image_moma = $result['id'].'.jpg';
-                    
-                    
-                    ?>
+                    $image_moma_date = $result['subject_date'];
+                    $image_moma_location = $result['location'];
+                    $image_moma_title = $result['title'];
+                    $image_moma_caption =  $result['caption'];
+                    $image_moma_credit =  $result['credit'];
+                    $image_moma_urlitem = $baseURL.'/item/it/1/'.$result['id'];
+
+
+
+
+            ?>
                     
   
   <div id="momapix_image_results_event" style="position:relative;z-index:5;">
@@ -125,22 +133,58 @@ foreach ($exif as $key => $section) {
 }
 -->
         
-
+<!-- subject_date - location: title - capiton © credit    subject_date
+   -->
         
-        
-                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>',
+                                                               '<?php echo $post_id; ?>',
+                                                               '<?php echo $image_moma_date; ?>',
+                                                               '<?php echo $image_moma_location ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_title)); ?>',
+                                                               '<?php echo $image_moma_credit; ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_caption)); ?>',
+                                                               '<?php echo $image_moma_urlitem; ?>'
+                                                                
+                                                               )" />
                     <img id="img_result" src="<?php echo $baseURL.'/Image'.$result['id']?>.jpg"/>
                     </a>
         <br>
-                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_s; ?>','<?php echo $post_id; ?>')" />
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_s; ?>',
+                                                               '<?php echo $post_id; ?>',
+                                                               '<?php echo $image_moma_date; ?>',
+                                                               '<?php echo $image_moma_location ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_title)); ?>',
+                                                               '<?php echo $image_moma_credit; ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_caption)); ?>',
+                                                               '<?php echo $image_moma_urlitem; ?>'
+                                                                
+                                                               )" />
                     small</a> |
-                    
-                    
-                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
-                    med</a> | 
-                    
-        
-                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_b; ?>','<?php echo $post_id; ?>')" />
+
+
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>',
+                                                               '<?php echo $post_id; ?>',
+                                                               '<?php echo $image_moma_date; ?>',
+                                                               '<?php echo $image_moma_location ?>',
+                                                              '<?php echo htmlspecialchars(addslashes($image_moma_title)); ?>',
+                                                               '<?php echo $image_moma_credit; ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_caption)); ?>',
+                                                               '<?php echo $image_moma_urlitem; ?>'
+                                                                
+                                                               )" />
+                    med</a> |
+
+
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_b; ?>',
+                                                               '<?php echo $post_id; ?>',
+                                                               '<?php echo $image_moma_date; ?>',
+                                                               '<?php echo $image_moma_location ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_title)); ?>',
+                                                               '<?php echo $image_moma_credit; ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_caption)); ?>',
+                                                               '<?php echo $image_moma_urlitem; ?>'
+                                                                
+                                                               )" />
                     big
                     </a>
  
@@ -149,7 +193,8 @@ foreach ($exif as $key => $section) {
                     
                     /* Visualizzazione Meta info img*/                              
                     
-                    echo '<p>'.$result['title'].'</p>'; 
+                    echo '<p>'.$image_moma_title.'</p>'; 
+                    /*
                     $exif = exif_read_data(($baseURL.'/Image'.$result['id'].'.jpg'), 0, true);
                     echo "Info:<br />\n";
                     foreach ($exif as $key => $section) {
@@ -158,7 +203,7 @@ foreach ($exif as $key => $section) {
                                                             }
                                                         }
                     
-                    
+                    */
                     ?>
      
         
@@ -180,7 +225,7 @@ foreach ($exif as $key => $section) {
     {
                
     echo '<div id="momapix_image_results"><div  id="momapix_image_results_inside">';
-    echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.++$page.'&type=wp_momapix_photo&event_title='.$result['title'].'&id_event='.$result['id_event'].'">';
+    echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.++$page.'&type=wp_momapix_photo&event_title='.htmlspecialchars($result['title']).'&id_event='.$result['id_event'].'">';
     echo '<img id="img_result" src="'.WP_PLUGIN_URL .'/momapix-image-selector/images/next_arrow.gif"><br>Click here to next</a>';
     echo '</div>';
     echo '</div>';
@@ -190,7 +235,7 @@ foreach ($exif as $key => $section) {
     elseif (isset($_GET['momapage']) && count($results['itemsInEvent'])==$results['requestItemsPerPage'])
     {
       echo '<div id="momapix_image_results"><div  id="momapix_image_results_inside">';
-      echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.++$page.'&type=wp_momapix_photo&event_title='.$result['title'].'&id_event='.$result['id_event'].'">';
+      echo '<a href="'. $_SERVER['PHP_SELF'].'?post_id='.$post_id.'&tab=photo&momapage='.++$page.'&type=wp_momapix_photo&event_title='.htmlspecialchars($result['title']).'&id_event='.$result['id_event'].'">';
       echo '<img id="img_result" src="'.WP_PLUGIN_URL .'/momapix-image-selector/images/next_arrow.gif"><br>Click here to next</a>';
       echo '</div>';
       echo '</div>';     
@@ -228,7 +273,7 @@ if ($page>1){
 		
 		foreach($results['eventsInArchive'] as $result)
 		{
-                    $image_moma_url = $baseURL."/Image".$result['id'].'.jpg';
+                    $image_moma_url = $baseURL."Image".$result['id'].'.jpg';
                     $image_moma = $result['id'].'.jpg';
                     ?>
 
@@ -239,7 +284,7 @@ if ($page>1){
                     echo $result['numberOfItemsInEvent'].' foto';
                     ?>
                     
-                    <a href="<?php echo $_SERVER["PHP_SELF"];?>?post_id=<?php echo $post_id;?>&tab=<?php echo $tabs; ?>&type=wp_momapix_photo&event_title=<?php echo $result['title'];?>&id_event=<?php echo $result['id_event'];?>">
+                    <a href="<?php echo $_SERVER["PHP_SELF"];?>?post_id=<?php echo $post_id;?>&tab=<?php echo $tabs; ?>&type=wp_momapix_photo&event_title=<?php echo htmlspecialchars(addslashes($result['title']));?>&id_event=<?php echo $result['id_event'];?>">
                         <img id="img_result" src="<?php echo $baseURL.'/Image'.$result['idcover']?>.jpg"/>
                     </a>
                     

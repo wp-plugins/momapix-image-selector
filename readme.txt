@@ -19,6 +19,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 
 == Changelog ==
 
+= 1.3.8 =
+* test compatibility WP 4.1.0 , display img caption url and more info
+
 = 1.3.7 =
 * test compatibility WP 3.9.1 , display img info
 

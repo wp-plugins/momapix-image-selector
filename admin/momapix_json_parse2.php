@@ -149,10 +149,16 @@ if ($_GET['momapage']>1){
     foreach($results['result'] as $result)
     {
 
-                    $image_moma_url_m = $baseURL."/Image".$result['id'].'.jpg';
-                    $image_moma_url_s = $baseURL."/Image".$result['id'].'.png';
-                    $image_moma_url_b = $baseURL."/Preview".$result['id'].'.jpg';
+                    $image_moma_url_m = $baseURL."Image".$result['id'].'.jpg';
+                    $image_moma_url_s = $baseURL."Image".$result['id'].'.png';
+                    $image_moma_url_b = $baseURL."Preview".$result['id'].'.jpg';
                     $image_moma = $result['id'].'.jpg';
+                    $image_moma_date = $result['subject_date'];
+                    $image_moma_location = $result['location'];
+                    $image_moma_title = $result['title'];
+                    $image_moma_caption =  $result['caption'];
+                    $image_moma_credit =  $result['credit'];
+                    $image_moma_urlitem = $baseURL.'/item/it/1/'.$result['id'];
 
 
          ?>
@@ -165,25 +171,60 @@ if ($_GET['momapage']>1){
         <div id="momapix_image_results_inside">
                          
                 
-                <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
-                <img id="img_result" src="<?php echo $image_moma_url_m; ?>"/>
-                <br/>
-                </a>
-                <br>
-                <?php echo $image_moma ?> <br>
-            
-                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_s; ?>','<?php echo $post_id; ?>')" />
-                    small</a> | 
-                    
-        
-                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>','<?php echo $post_id; ?>')" />
-                    med</a> | 
-                    
-        
-                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_b; ?>','<?php echo $post_id; ?>')" />
+                <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>',
+                                                               '<?php echo $post_id; ?>',
+                                                               '<?php echo $image_moma_date; ?>',
+                                                               '<?php echo $image_moma_location ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_title)); ?>',
+                                                               '<?php echo $image_moma_credit; ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_caption)); ?>',
+                                                               '<?php echo $image_moma_urlitem; ?>'
+                                                                
+                                                               )" />
+                    <img id="img_result" src="<?php echo $baseURL.'/Image'.$result['id']?>.jpg"/>
+                    </a>
+        <br>
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_s; ?>',
+                                                               '<?php echo $post_id; ?>',
+                                                               '<?php echo $image_moma_date; ?>',
+                                                               '<?php echo $image_moma_location ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_title)); ?>',
+                                                               '<?php echo $image_moma_credit; ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_caption)); ?>',
+                                                               '<?php echo $image_moma_urlitem; ?>'
+                                                                
+                                                               )" />
+                    small</a> |
+
+
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_m; ?>',
+                                                               '<?php echo $post_id; ?>',
+                                                               '<?php echo $image_moma_date; ?>',
+                                                               '<?php echo $image_moma_location ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_title)); ?>',
+                                                               '<?php echo $image_moma_credit; ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_caption)); ?>',
+                                                               '<?php echo $image_moma_urlitem; ?>'
+                                                                
+                                                               )" />
+                    med</a> |
+
+
+                    <a href="#" onclick="return insert_picture('<?php echo $image_moma_url_b; ?>',
+                                                               '<?php echo $post_id; ?>',
+                                                               '<?php echo $image_moma_date; ?>',
+                                                               '<?php echo $image_moma_location ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_title)); ?>',
+                                                               '<?php echo $image_moma_credit; ?>',
+                                                               '<?php echo htmlspecialchars(addslashes($image_moma_caption)); ?>',
+                                                               '<?php echo $image_moma_urlitem; ?>'
+                                                                
+                                                               )" />
                     big
                     </a>
-            
+            <?php
+            echo '<p>'.$result['title'].'</p>';
+            ?>
         </div>
 
     </div> 
