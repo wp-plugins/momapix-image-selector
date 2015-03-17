@@ -2,8 +2,8 @@
 Contributors: cristiano.zanca 
 Tags: momapix, picture, photo, Illustration, gallery
 Requires at least: 3.3
-Tested up to: 4.1.0
-Stable tag: 1.3.9
+Tested up to: 4.1.1
+Stable tag: 1.4.0
 
 Momapix image plugin allow you to insert Momapix photos in your post while you are publishing it
 
@@ -18,6 +18,9 @@ Extract the zip file and just drop the contents in the wp-content/plugins/ direc
 3. Icon to click in editing post to add momapix image.
 
 == Changelog ==
+
+= 1.4.0 =
+* compatibility with last wordpress version and back-end issue
 
 = 1.3.9 =
 * formatting layout text

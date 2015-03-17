@@ -20,7 +20,7 @@ function momapix_menu_page(){
 <input type="hidden" name="action" value="save_momapix_default_value" />
 <!-- Adding security through hidden referrer field -->
 <?php wp_nonce_field( 'momapix' ); ?>
-Account Momapix Url: <input type="text" name="momapix_account" value="<?php echo esc_html( $options['momapix_account'] ); ?>" size="55"/><br />
+Account Momapix Url: <input type="text" name="momapix_account" value="<?php  if(substr($options['momapix_account'], -1) != "/") $options['momapix_account'] .= "/" ; echo esc_html( $options['momapix_account'] );?>" size="55"/><br />
 Account API Key: <input type="text" name="momapix_api_key" value="<?php echo esc_html($options['momapix_api_key']); ?>" size="55"/><br />
 
 <input type="submit" value="Submit"

@@ -31,12 +31,12 @@ wp_die( 'This plugin requires WordPress version 3.3 or higher.' );
 
     if ( get_option( 'momapix_default_value' ) === false ) {
 $new_options['momapix_account'] = ""; //for test http://demo.momapix.com/develop
-$new_options['version'] = '1.3.9';
+$new_options['version'] = '1.4.0';
 add_option( 'momapix_default_value', $new_options );
 } else {
 $existing_options = get_option( 'momapix_default_value' );
-if ( $existing_options['version'] < '1.3.9' ) {
-$existing_options['version'] = '1.3.9';
+if ( $existing_options['version'] < '1.4.0' ) {
+$existing_options['version'] = '1.4.0';
 update_option( 'momapix_default_value', $existing_options );
 }
 }
